@@ -1,0 +1,18 @@
+package com.utn.desarrollosoft.contable.entidades.venta;
+
+import com.utn.desarrollosoft.contable.entidades.catalogo.ListaPrecioArticulo;
+import com.utn.desarrollosoft.contable.entidades.base.EntityId;
+import lombok.Data;
+
+@Data
+public class FacturaVentaDetalle extends EntityId {
+    private FacturaVenta factura;
+    private ListaPrecioArticulo listaPrecioArticulo;
+    private String descripcion;
+    private double cantidad;
+    private double precioUnitario;
+    private double porcentajeBonificacion;
+    private double importeNeto;
+    private double importeIva;
+    private double importeSubtotal;
+}
