@@ -1,15 +1,18 @@
 package com.utn.desarrollosoft.contable.entidades.dto;
 
+import lombok.Builder;
 
 import java.io.Serializable;
 
-
+@Builder
 public class FacturaVentaDetalleDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private String productoDescripcion;
+    private Integer productoId;
+    private String productoDenominacion;
+    private Integer listaPrecioId;
     private Integer cantidad;
     private Double precioUnitario;
     private Double subtotal;
@@ -17,12 +20,22 @@ public class FacturaVentaDetalleDTO implements Serializable {
     public FacturaVentaDetalleDTO() {
     }
 
-    public FacturaVentaDetalleDTO(Long id, String productoDescripcion, Integer cantidad, Double precioUnitario) {
+    public FacturaVentaDetalleDTO(Long id, Integer productoId, String productoDescripcion, Integer listaPrecioId, Integer cantidad, Double precioUnitario, Double subtotal) {
         this.id = id;
-        this.productoDescripcion = productoDescripcion;
+        this.productoId = productoId;
+        this.productoDenominacion = productoDescripcion;
+        this.listaPrecioId = listaPrecioId;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
-        this.subtotal = calcularSubtotal();
+        this.subtotal = subtotal;
+    }
+
+    public String getProductoDenominacion() {
+        return productoDenominacion;
+    }
+
+    public void setProductoDenominacion(String productoDenominacion) {
+        this.productoDenominacion = productoDenominacion;
     }
 
     public Long getId() {
@@ -33,12 +46,20 @@ public class FacturaVentaDetalleDTO implements Serializable {
         this.id = id;
     }
 
-    public String getProductoDescripcion() {
-        return productoDescripcion;
+    public Integer getProductoId() {
+        return productoId;
     }
 
-    public void setProductoDescripcion(String productoDescripcion) {
-        this.productoDescripcion = productoDescripcion;
+    public void setProductoId(Integer productoId) {
+        this.productoId = productoId;
+    }
+
+    public Integer getListaPrecioId() {
+        return listaPrecioId;
+    }
+
+    public void setListaPrecioId(Integer listaPrecioArticuloId) {
+        this.listaPrecioId = listaPrecioArticuloId;
     }
 
     public Integer getCantidad() {
