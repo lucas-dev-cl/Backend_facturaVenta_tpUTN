@@ -1,9 +1,16 @@
 package com.utn.desarrollosoft.contable.entidades.venta;
 
 import com.utn.desarrollosoft.contable.entidades.base.AuditoriaApp;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "tipos_monedas")
 public class TipoMoneda extends AuditoriaApp {
     private String codigoAfip;
     private String denominacion;

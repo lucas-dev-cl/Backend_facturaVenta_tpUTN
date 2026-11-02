@@ -1,9 +1,16 @@
 package com.utn.desarrollosoft.contable.entidades.venta;
 
 import com.utn.desarrollosoft.contable.entidades.base.AuditoriaApp;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "puntos_venta")
 public class PuntoVenta extends AuditoriaApp {
     private int numero;
     private String descripcion;
