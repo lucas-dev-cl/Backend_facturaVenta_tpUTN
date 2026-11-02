@@ -2,10 +2,11 @@ package com.utn.desarrollosoft.contable.controller;
 
 import com.utn.desarrollosoft.contable.entidades.dto.FacturaVentaDTO;
 import com.utn.desarrollosoft.contable.servicios.FacturaVentaService;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("api/facturas")
+@RequestMapping("/api/facturas")
 public class FacturaVentaController {
 
     private final FacturaVentaService facturaVentaService;
@@ -31,15 +31,19 @@ public class FacturaVentaController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<FacturaVentaDTO>> getFacturasVenta(
+    public ResponseEntity<Page<FacturaVentaDTO>> getFacturasVenta(
             @RequestParam(required = false) Long numeroFactura,
             @RequestParam(required = false) String clienteDenominacion,
             @RequestParam(required = false) String condicionIva,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaDesde,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaHasta) {
+            @RequestParam(required = false) String puntoVenta,
+            @RequestParam(required = false) LocalDate fechaDesde,
+            @RequestParam(required = false) LocalDate fechaHasta,
+            @RequestParam(required = false) LocalTime horaDesde,
+            @RequestParam(required = false) LocalTime horaHasta,
+            @PageableDefault(size = 15) Pageable pageable) {
 
-        List<FacturaVentaDTO> facturas = facturaVentaService.filtrar(
-                numeroFactura, clienteDenominacion, condicionIva, fechaDesde, fechaHasta);
+        Page<FacturaVentaDTO> facturas = facturaVentaService.filtrar(
+                numeroFactura, clienteDenominacion, condicionIva, puntoVenta, fechaDesde, fechaHasta, horaDesde, horaHasta, pageable);
         return ResponseEntity.ok(facturas);
     }
 
